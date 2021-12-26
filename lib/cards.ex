@@ -64,10 +64,16 @@ defmodule Cards do
       {["Ace of Spades", "Two of Spades", "Three of Spades"], true}
 
       iex> deck = Cards.create_deck()
-      iex> {hand_1, rest_1} = Cards.deal(deck, 6)
-      iex> {hand_2, rest_2} = Cards.deal(hand_1, 7)
-      iex> {length(hand_1), length(rest_1), length(hand_2), length(rest_2)}
-      {6, 46, 6, 0}
+      iex> {hand_6, rest_46} = Cards.deal(deck, 6)
+      iex> {^hand_6, rest_0} = Cards.deal(hand_6, 7)
+      iex> {length(hand_6), length(rest_46), length(rest_0)}
+      {6, 46, 0}
+
+      iex> deck = Cards.create_deck()
+      iex> {hand_52, rest_0} = Cards.deal(deck, 52)
+      iex> {hand_0, ^rest_0} = Cards.deal(rest_0, 1)
+      iex> {length(hand_52), length(rest_0), length(hand_0)}
+      {52, 0, 0}
   """
   @spec deal(deck, hand_size) :: {hand, deck}
   def deal(deck, hand_size) when hand_size in @hand_range do
@@ -90,7 +96,7 @@ defmodule Cards do
   end
 
   @doc """
-  Retrieves a `deck` from file `filename` in the configured directory.
+  Retrieves a deck from file `filename` in the configured directory.
 
   ## Examples
 

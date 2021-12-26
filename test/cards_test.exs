@@ -7,7 +7,7 @@ defmodule CardsTest do
 
   doctest Cards
 
-  describe "Cards.create_deck/1" do
+  describe "Cards.create_deck/0" do
     test "returns a list of cards" do
       deck = Cards.create_deck()
       assert ["Ace of Spades" | _] = deck
