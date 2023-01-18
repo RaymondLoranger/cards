@@ -32,7 +32,7 @@ defmodule CardsTest do
     end
   end
 
-  describe "Cards.load_deck/1" do
+  describe "Cards.save_deck/2 and Cards.load_deck/1" do
     test "returns a deck from a binary file encoding it" do
       shuffled_deck = Cards.create_deck() |> Cards.shuffle()
       filename = "load_deck_test.binary"

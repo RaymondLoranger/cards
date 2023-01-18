@@ -84,7 +84,7 @@ defmodule Cards do
   Saves a `deck` to file `filename` in the configured directory.
   """
   @spec save_deck(deck, String.t()) :: :ok | {:error, String.t()}
-  def save_deck(deck, filename) do
+  def save_deck(deck, filename) when is_binary(filename) do
     binary = :erlang.term_to_binary(deck)
     :ok = decks_dir() |> File.mkdir_p!()
     file = decks_dir() |> Path.join(filename)
@@ -106,7 +106,7 @@ defmodule Cards do
       true
   """
   @spec load_deck(String.t()) :: deck | {:error, String.t()}
-  def load_deck(filename) do
+  def load_deck(filename) when is_binary(filename) do
     file = decks_dir() |> Path.join(filename)
 
     case File.read(file) do
