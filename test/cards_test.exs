@@ -3,7 +3,7 @@ defmodule CardsTest do
   use PersistConfig
 
   @hand_range get_env(:hand_range)
-  @size @hand_range.last
+  @deck_size @hand_range.last
 
   doctest Cards
 
@@ -11,7 +11,7 @@ defmodule CardsTest do
     test "returns a list of cards" do
       deck = Cards.create_deck()
       assert ["Ace of Spades" | _] = deck
-      assert length(deck) == @size and is_list(deck)
+      assert length(deck) == @deck_size and is_list(deck)
     end
   end
 

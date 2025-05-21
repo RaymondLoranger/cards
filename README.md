@@ -21,4 +21,5 @@ From the "cards" folder, start the interactive shell:
   - iex -S mix
   - Cards.create_deck() # => list of strings representing a deck of cards
   - Cards.create_deck() |> Cards.shuffle() # => shuffled deck
+  - Cards.create_hand(5) # => {shuffled_hand_of_5_cards, rest_of_shuffled_deck}
   - etc.
