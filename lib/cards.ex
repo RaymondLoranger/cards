@@ -96,9 +96,10 @@ defmodule Cards do
   end
 
   @doc """
-  Saves a `deck` to file `filename` in the configured directory.
+  Saves a `deck` to file `filename` in the configured directory
+  (per `config/runtime.exs`).
   """
-  @spec save_deck(deck, Path.t()) :: :ok | {:error, String.t()}
+  @spec save_deck(deck, String.t()) :: :ok | {:error, String.t()}
   def save_deck(deck, filename) when is_list(deck) and is_binary(filename) do
     binary = :erlang.term_to_binary(deck)
     dir = decks_dir()
@@ -112,7 +113,8 @@ defmodule Cards do
   end
 
   @doc """
-  Retrieves a deck from file `filename` in the configured directory.
+  Retrieves a deck from file `filename` in the configured directory
+  (per `config/runtime.exs`).
 
   ## Examples
 
@@ -122,7 +124,7 @@ defmodule Cards do
       iex> shuffled_deck == Cards.load_deck(filename)
       true
   """
-  @spec load_deck(Path.t()) :: deck | {:error, String.t()}
+  @spec load_deck(String.t()) :: deck | {:error, String.t()}
   def load_deck(filename) when is_binary(filename) do
     file = decks_dir() |> Path.join(filename)
 
