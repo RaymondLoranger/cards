@@ -22,6 +22,16 @@ defmodule Cards do
 
   @doc """
   Returns a list of strings representing a deck of cards.
+
+  ## Examples
+
+      iex> deck = Cards.create_deck()
+      iex> Enum.take(deck, 3)
+      ["Ace of Spades", "Two of Spades", "Three of Spades"]
+
+      iex> deck = Cards.create_deck()
+      iex> Enum.take(deck, -3)
+      ["Jack of Diamonds", "Queen of Diamonds", "King of Diamonds"]
   """
   @spec create_deck :: deck
   def create_deck do
@@ -91,8 +101,9 @@ defmodule Cards do
   @spec save_deck(deck, Path.t()) :: :ok | {:error, String.t()}
   def save_deck(deck, filename) when is_list(deck) and is_binary(filename) do
     binary = :erlang.term_to_binary(deck)
-    :ok = decks_dir() |> File.mkdir_p!()
-    file = decks_dir() |> Path.join(filename)
+    dir = decks_dir()
+    :ok = File.mkdir_p!(dir)
+    file = Path.join(dir, filename)
 
     case File.write(file, binary) do
       :ok -> :ok
@@ -106,8 +117,9 @@ defmodule Cards do
   ## Examples
 
       iex> shuffled_deck = Cards.create_deck() |> Cards.shuffle()
-      iex> :ok = Cards.save_deck(shuffled_deck, "load_deck_doctest.binary")
-      iex> shuffled_deck == Cards.load_deck("load_deck_doctest.binary")
+      iex> filename = "load_deck_doctest.binary"
+      iex> :ok = Cards.save_deck(shuffled_deck, filename)
+      iex> shuffled_deck == Cards.load_deck(filename)
       true
   """
   @spec load_deck(Path.t()) :: deck | {:error, String.t()}
