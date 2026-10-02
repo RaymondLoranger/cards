@@ -63,7 +63,7 @@ defmodule Cards do
   """
   @spec contains?(deck, card) :: boolean
   def contains?(deck, card) when is_list(deck) and is_binary(card) do
-    Enum.member?(deck, card)
+    card in deck
   end
 
   @doc """
